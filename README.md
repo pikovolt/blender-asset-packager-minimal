@@ -10,6 +10,38 @@ The working CLI is the minimum needed to make that structure observable.
 It is intentionally small and pure Python so it can run from Windows Command Prompt without Blender,
 Maya, or any other DCC application.
 
+## What "spec-driven" means here
+
+In this repository, spec-driven implementation means that the expected behavior is written before the AI edits code.
+
+The task spec defines:
+
+- what the tool should do
+- what it must not do
+- what files or behavior are in scope
+- what validation commands must pass
+
+The spec is not just documentation after implementation.
+It is the primary input that constrains the implementation work.
+
+## What "agent-driven" means here
+
+In this repository, agent-driven implementation means that an AI coding agent reads the repository-local instructions and performs a bounded implementation task.
+
+The agent is expected to read:
+
+- project-level rules
+- task-scoped specifications
+- forbidden behavior
+- validation commands
+- expected reporting format
+
+The important point is that the agent is not asked to freely redesign the tool.
+Humans define the work boundary and review criteria.
+The agent performs implementation work inside that boundary.
+
+## Minimal working example
+
 The sample task is a Blender-oriented asset packaging CLI:
 
 1. scan an asset tree and create a manifest
