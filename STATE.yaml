@@ -1,0 +1,14 @@
+current_task: null
+last_completed: 000_scan_validate_plan
+tutorial_entry: TUTORIAL.md
+next_steps_entry: NEXT_STEPS.md
+validation:
+  fast: expected
+blockers: []
+next_candidates:
+  - 010_safe_copy_todo
+notes:
+  - This sample demonstrates spec-driven + agent-driven workflow boundaries.
+  - Safe copy is intentionally left as the agent implementation exercise.
+
+  - NEXT_STEPS.md is a human-facing post-tutorial guide, not an always-read agent instruction.
