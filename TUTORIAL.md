@@ -54,7 +54,7 @@ This CLI does not analyze file contents — it handles **only paths, extensions,
 Navigate to the extracted folder in Windows Command Prompt.
 
 ```bat
-cd blender_asset_packager_min_v3
+cd blender-asset-packager-minimal
 run_demo.bat
 ```
 

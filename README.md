@@ -1,4 +1,4 @@
-# Blender Asset Packager Min v4
+# Blender Asset Packager Minimal
 
 This is a **small Codex-first sample repository** for spec-driven + agent-driven implementation.
 It is intentionally small and pure Python so it can run from Windows Command Prompt without Blender,
@@ -51,7 +51,7 @@ see [`RELATED_WORK.md`](RELATED_WORK.md).
 ## Quick start on Windows cmd.exe
 
 ```bat
-cd blender_asset_packager_min_v4
+cd blender-asset-packager-minimal
 python -m venv .venv
 .venv\Scripts\activate.bat
 python -m pip install -U pip
