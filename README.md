@@ -1,6 +1,12 @@
 # Blender Asset Packager Minimal
 
 This is a **small Codex-first sample repository** for spec-driven + agent-driven implementation.
+
+The code itself is not the point.
+This repository shows how to structure specs, contracts, and validation
+so that an AI agent can implement a bounded task without widening scope.
+The working CLI is the minimum needed to make that structure observable.
+
 It is intentionally small and pure Python so it can run from Windows Command Prompt without Blender,
 Maya, or any other DCC application.
 
