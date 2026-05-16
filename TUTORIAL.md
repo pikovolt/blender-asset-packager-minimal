@@ -71,7 +71,7 @@ On success, the following sequence is executed.
 The expected final output is roughly as follows.
 
 ```text
-boundary check OK
+forbidden-token check OK
 3 passed
 ```
 
