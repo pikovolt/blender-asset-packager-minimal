@@ -49,5 +49,5 @@ End with:
 
 ## Human-facing guide
 
-`NEXT_STEPS.md` and `RELATED_WORK.md` are post-tutorial guides for human readers.
+`NEXT_STEPS.md`, `RELATED_WORK.md` and `SDD_ADD_BACKGROUND.md` are post-tutorial guides for human readers.
 Do not treat them as implementation instruction unless the user explicitly asks.

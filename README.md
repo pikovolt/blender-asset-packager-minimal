@@ -10,6 +10,15 @@ The working CLI is the minimum needed to make that structure observable.
 It is intentionally small and pure Python so it can run from Windows Command Prompt without Blender,
 Maya, or any other DCC application.
 
+## Background and Context
+
+For readers who want to understand the historical context behind spec-driven and
+agent-driven development before diving into this repository,
+see [`SDD_ADD_BACKGROUND.md`](SDD_ADD_BACKGROUND.md).
+
+It covers the progression from early LLM-assisted coding to the current
+spec-driven / agent-driven approach, with references to primary sources.
+
 ## What "spec-driven" means here
 
 In this repository, spec-driven implementation means that the expected behavior is written before the AI edits code.
