@@ -1,8 +1,10 @@
 # PROJECT_CONTRACT.md
 
+This file plays the role of a constitution file in this sample (equivalent to `constitution.md` in GitHub Spec Kit).
+
 ## Supported environment
 
-- OS: Windows 10/11 cmd.exe first
+- OS: Windows 10/11 cmd.exe
 - Python: 3.11+
 - Runtime: pure Python
 - Blender dependency: none
