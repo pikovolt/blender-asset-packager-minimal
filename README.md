@@ -2,13 +2,17 @@
 
 This is a **small Codex-first sample repository** for spec-driven + agent-driven implementation.
 
-The code itself is not the point.
+The code itself is not the main point.
 This repository shows how to structure specs, contracts, and validation
 so that an AI agent can implement a bounded task without widening scope.
 The working CLI is the minimum needed to make that structure observable.
 
 It is intentionally small and pure Python so it can run from Windows Command Prompt without Blender,
 Maya, or any other DCC application.
+
+If you are completely new to AI coding, start with simple prompt-based coding
+first. This sample is for the next step: moving from prompt-only or vibe-style
+coding toward spec-driven and agent-ready workflows.
 
 ## Background and Context
 
