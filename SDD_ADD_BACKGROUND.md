@@ -6,7 +6,7 @@
 
 Between 2022 and 2023, as code generation via GitHub Copilot and ChatGPT became widespread, the prevailing development style was "write a prompt, paste the returned code."
 
-In February 2025, Andrej Karpathy (co-founder of OpenAI) gave this style a name: **vibe coding**. The phrase — "fully give in to the vibes and forget that the code even exists" — described a workflow of generating and revising code through high-level natural-language instructions alone.
+In February 2025, Andrej Karpathy (co-founder of OpenAI) gave this existing style a name: **vibe coding**. The phrase — "fully give in to the vibes and forget that the code even exists" — described a workflow of generating and revising code through high-level natural-language instructions alone.
 
 This approach carried structural problems.
 
