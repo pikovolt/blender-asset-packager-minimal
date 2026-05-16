@@ -187,7 +187,7 @@ than following it sequentially.
 
 **An emerging paradigm on the horizon:**
 
-The next shift becoming visible in 2025–2026 is called **Context Engineering**.
+The next shift becoming visible in 2025–2026 is often described as **Context Engineering**.
 
 Where prompt engineering focuses on *how to phrase instructions*, context 
 engineering focuses on designing the entire information environment in which 
@@ -199,9 +199,10 @@ the **Context Development Lifecycle (CDLC)**. CDLC argues that the context
 given to AI agents should be treated like an engineering artifact: generated, 
 evaluated, distributed, and observed.
 
-The arXiv paper "Spec-Driven Development: From Code to Contract in the Age of 
-AI" (February 2026) draws the core distinction: traditional specifications are 
-read by humans, while SDD specifications **execute as validation gates**.
+The January 2026 arXiv paper "Spec-Driven Development: From Code to Contract
+in the Age of AI Coding Assistants" describes the core shift: specifications
+become the source of truth, while code becomes a generated or verified
+secondary artifact.
 
 This direction represents a shift from static documents to executable 
 constraints — pointing toward a future in which designing context and 

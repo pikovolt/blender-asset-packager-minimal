@@ -29,7 +29,7 @@ def main() -> int:
             print(f"ERROR: {failure}", file=sys.stderr)
         return 1
 
-    print("boundary check OK")
+    print("forbidden-token check OK")
     return 0
 
 

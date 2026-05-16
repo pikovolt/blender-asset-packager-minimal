@@ -135,7 +135,8 @@ Examine how the `Must` / `Must not` / `Done` entries in this Spec Card correspon
 | Deterministic JSON | `sort_keys=True` in `manifest.py` | Inspect generated JSON |
 | Reject manifest paths containing `..` | `paths.py`, `validate_manifest()` | `tests/test_assetpack.py` |
 | Export planning is dry-run only | `build_export_plan()` | `work/*.export_plan.json` |
-| No copy/delete | `manifest.py`, `check_boundaries.py` | boundary check |
+| No copy/delete behavior is implemented | `manifest.py`, `tests/test_assetpack.py` | CLI artifacts and pytest |
+| Obvious forbidden API fragments are absent | `scripts/check_boundaries.py` | forbidden-token scan |
 
 ### What You Can Observe Here
 
@@ -150,7 +151,9 @@ This is the minimal sample portion of "spec-driven" development.
 python scripts\check_boundaries.py
 ```
 
-This is a lightweight check to detect whether dangerous processing fragments have been introduced into application code.
+This is a lightweight forbidden-token scan. It checks application code for a
+small list of disallowed text fragments; it is not a complete security or
+filesystem-safety validator.
 
 Examples currently checked:
 
@@ -172,7 +175,12 @@ python scripts\validate.py --profile fast
 
 ### What You Can Observe Here
 
-What this confirms is that **boundaries can be enforced mechanically, rather than relying solely on prompting "don't do this"**.
+What this confirms is that **some boundary rules can be turned into mechanical
+checks, instead of relying only on prompting "don't do this"**.
+
+In this minimal sample, the check only catches obvious forbidden text fragments.
+It does not prove complete filesystem safety, path safety, or absence of all
+dangerous behavior.
 
 The boundary check in this sample is minimal, but in DCC tool implementations it can be extended to checks such as:
 
@@ -213,6 +221,10 @@ What this task is intended to confirm is whether the agent can adhere to the fol
 - Add pytest
 - Pass export-safe validation
 ```
+
+Note: in the current sample, `export-safe` is a named placeholder profile.
+It currently aliases `fast` and becomes meaningful only after the safe-copy task
+adds filesystem-output safety tests.
 
 ---
 
