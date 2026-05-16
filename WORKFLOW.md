@@ -22,3 +22,6 @@ Use only when the task is marked high risk.
 
 - `000_scan_validate_plan`: implemented
 - `010_safe_copy_todo`: intentionally not implemented; used as a later high-risk comparison task
+
+Do not treat `export-safe` as proof that filesystem export/copy behavior is safe yet.
+When `010_safe_copy_todo` is implemented, `export-safe` must be strengthened to test filesystem-output safety.

@@ -2,6 +2,17 @@
 
 ---
 
+## TL;DR
+
+1. Prompt-only coding made intent drift, context decay, and unverifiable output visible.
+2. AGENTS.md / CLAUDE.md preserve repository-level context for agents.
+3. Spec Cards define one task's intent, scope, constraints, and verification.
+4. Project contracts / constitutions hold cross-task rules.
+5. Risky changes need separate planning, implementation, and review roles.
+6. This sample demonstrates the authoring layer, not a full Context Engineering platform.
+
+---
+
 ## 1. The Starting Point: Problems That Emerged When LLMs First Entered Coding
 
 Between 2022 and 2023, as code generation via GitHub Copilot and ChatGPT became widespread, the prevailing development style was "write a prompt, paste the returned code."
@@ -112,11 +123,20 @@ AgentMesh (2025) proposed separating four specialized agents: Planner, Coder, De
 
 In this structure, explicitly restricting which files each agent may read and which it may modify became the standard approach for preventing role boundary violations.
 
+This repository only implements the reviewer-facing part as a minimal example.
+Planner, debugger, and multi-agent orchestration are described as next-step
+patterns, not as features already implemented here.
+
+The concrete implemented pieces are `.claude/agents/spec-reviewer.md`,
+`.codex/agents/spec-reviewer.toml`, and the validation scripts under `scripts/`.
+
 ---
 
 ## 7. The Current State: Tool Proliferation and Convergence
 
-The SDD tool landscape expanded rapidly from the GitHub Spec Kit announcement in July 2025 through the release of AWS Kiro and into early 2026.
+The tool landscape expanded rapidly from Kiro's July 2025 preview,
+through GitHub Spec Kit's September 2025 announcement,
+to Kiro's November 2025 general availability and related SDD tooling in early 2026.
 
 | Tool | Scale and characteristics |
 |---|---|
@@ -171,10 +191,13 @@ The next shift becoming visible in 2025–2026 is called **Context Engineering**
 
 Where prompt engineering focuses on *how to phrase instructions*, context 
 engineering focuses on designing the entire information environment in which 
-a model operates — memory, retrieved documents, tool definitions, conversation 
-history. Patrick Debois introduced the concept "Context is the new Code" at 
-AI Engineer London 2024, framing a Context Development Lifecycle (CDLC) that 
-mirrors the traditional Software Development Lifecycle (SDLC).
+a model operates — repository instructions, specifications, retrieved 
+documents, tool definitions, memory, and evaluation feedback.
+
+A related 2026 framing is Patrick Debois' **"Context Is the New Code"** and 
+the **Context Development Lifecycle (CDLC)**. CDLC argues that the context 
+given to AI agents should be treated like an engineering artifact: generated, 
+evaluated, distributed, and observed.
 
 The arXiv paper "Spec-Driven Development: From Code to Contract in the Age of 
 AI" (February 2026) draws the core distinction: traditional specifications are 
