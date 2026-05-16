@@ -38,13 +38,43 @@ Spec-Driven Development (SDD) treats the specification as the source of truth an
 
 The intellectual lineage of this approach draws on TDD (Test-Driven Development) and BDD (Behavior-Driven Development).
 
-According to Thoughtworks' analysis, SDD technically means "explicitly defining the external behavior of the target software" — input/output mappings, preconditions, postconditions, and so on. It goes beyond a Product Requirements Document (PRD) by incorporating structured prompts and explicit technical constraints.
+According to Thoughtworks' analysis, SDD technically means "explicitly defining 
+the external behavior of the target software" — input/output mappings, 
+preconditions, postconditions, and so on.
 
-A well-formed Spec Card is said to define six elements: outcomes, scope boundaries, constraints, prior decisions, task breakdown, and verification criteria.
+**How a Spec Card differs from a PRD:**
+
+A Product Requirements Document is written for humans — product managers, 
+designers, and engineers who can fill in implementation details through 
+judgment and discussion. A Spec Card is written so that an LLM agent can 
+execute it without further negotiation. The practical differences fall into 
+three areas.
+
+First, *the addressee differs*. A PRD assumes a human implementer who will 
+ask clarifying questions when something is unclear. A Spec Card assumes an 
+agent that will pick a default and proceed silently when something is unclear, 
+making ambiguity a direct source of intent drift.
+
+Second, *acceptance criteria differ*. A PRD often states "the feature should 
+feel responsive" or "the UI should be intuitive." A Spec Card must state 
+"response under 200 ms at the 95th percentile" or "the test suite must pass" — 
+criteria that are Executable, Binary, and Independent (the same criteria 
+discussed in chapter 5).
+
+Third, *forbidden behavior is explicit*. A PRD typically lists what should be 
+built. A Spec Card additionally lists what must not be built — file deletion, 
+network access, scope expansion — because an agent left to its own judgment 
+will often produce these as "helpful additions."
+
+A well-formed Spec Card is said to define six elements: outcomes, scope 
+boundaries, constraints, prior decisions, task breakdown, and verification 
+criteria. The "constraints" and "scope boundaries" elements are where the 
+divergence from a traditional PRD is most visible — a PRD rarely defines 
+explicit Must-not items at the same level of detail as Must items.
 
 ---
 
-## 4. The Rise of PROJECT_CONTRACT.md: Cross-Task Constraints
+## 4. Cross-Task Constraints (Constitution Files)
 
 It became clear that per-task specs alone were insufficient. A cross-task definition of "what must never be done in this repository" was needed.
 
@@ -106,25 +136,83 @@ The study's interpretation: LLM-generated context files hurt performance, wherea
 
 **The arc in a single sentence:**
 
-As work delegation to LLM agents expanded, the need to convert "ambiguous instructions" into "verifiable structures" became progressively clearer — a staged historical process.
+As work delegation to LLM agents expanded, the need to convert "ambiguous instructions" 
+into "verifiable structures" became progressively clearer.
 
-| Period | Problem solved | Concept that emerged |
+**On the timeline:**
+
+The chapters above are ordered by the problem each concept addresses, not by strict 
+chronological order of release. In practice, several of these tools and conventions 
+emerged in parallel within a narrow window. GitHub Spec Kit was released in 
+September 2025, AWS Kiro reached general availability in November 2025, AGENTS.md 
+was transferred to the Agentic AI Foundation in December 2025, and the first 
+empirical evaluation of AGENTS.md was published in February 2026 — all within 
+roughly six months.
+
+The table below should therefore be read as a **problem-to-concept map**, not as 
+a strict release timeline. The "Period" column indicates when the underlying 
+problem became widely recognized, not when a single canonical tool shipped.
+
+| Period when the problem became widely recognized | Problem | Concept that emerged |
 |---|---|---|
-| 2022–2023 | Cost of re-explaining the same context each session | AGENTS.md / CLAUDE.md |
+| 2022–2023 | Cost of re-explaining the same context each session | AGENTS.md / CLAUDE.md convention |
 | 2023–2024 | Scope drift; absence of a definition of done | Spec Card (Must / Must not / Done) |
-| 2024– | Cross-task constraint definition | PROJECT_CONTRACT.md / Constitution |
+| 2024– | Cross-task constraint definition | Constitution / project-contract files |
 | 2024–2025 | Risk-based separation of work types | Workflow branching |
 | 2025– | Quality degradation from mixed agent roles | Agent separation (Planner / Implementer / Reviewer) |
+
+Concrete shipping events (Spec Kit September 2025, Kiro November 2025, AAIF 
+transfer December 2025, ETH Zurich study February 2026) overlap this map rather 
+than following it sequentially.
 
 **An emerging paradigm on the horizon:**
 
 The next shift becoming visible in 2025–2026 is called **Context Engineering**.
 
-Where prompt engineering focuses on *how to phrase instructions*, context engineering focuses on designing the entire information environment in which a model operates — memory, retrieved documents, tool definitions, conversation history. Patrick Debois introduced the concept "Context is the new Code" at AI Engineer London 2024, framing a Context Development Lifecycle (CDLC) that mirrors the traditional Software Development Lifecycle (SDLC).
+Where prompt engineering focuses on *how to phrase instructions*, context 
+engineering focuses on designing the entire information environment in which 
+a model operates — memory, retrieved documents, tool definitions, conversation 
+history. Patrick Debois introduced the concept "Context is the new Code" at 
+AI Engineer London 2024, framing a Context Development Lifecycle (CDLC) that 
+mirrors the traditional Software Development Lifecycle (SDLC).
 
-The arXiv paper "Spec-Driven Development: From Code to Contract in the Age of AI" (February 2026) draws the core distinction: traditional specifications are read by humans, while SDD specifications **execute as validation gates**.
+The arXiv paper "Spec-Driven Development: From Code to Contract in the Age of 
+AI" (February 2026) draws the core distinction: traditional specifications are 
+read by humans, while SDD specifications **execute as validation gates**.
 
-This direction represents a shift from static documents to executable constraints — pointing toward a future in which designing context and specifications, rather than writing code, becomes the central engineering activity.
+This direction represents a shift from static documents to executable 
+constraints — pointing toward a future in which designing context and 
+specifications, rather than writing code, becomes the central engineering 
+activity.
+
+**Where this sample sits relative to that direction:**
+
+This sample covers the first half of the trajectory above and stops short of 
+the second half. The following mapping makes the boundary explicit.
+
+| Context Engineering element | Status in this sample |
+|---|---|
+| Repository-level instructions for the agent | Covered. `AGENTS.md` and `CLAUDE.md` serve this role. |
+| Cross-task constraints as a separate artifact | Covered. `PROJECT_CONTRACT.md`. |
+| Per-task scope as a separate artifact | Covered. `tasks/<id>/spec.md`. |
+| Workflow branching by risk | Covered minimally. `WORKFLOW.md` declares the branching but does not enforce it. |
+| Mechanical checks as executable gates | Covered partially. `scripts/check_boundaries.py` is a string-level check, not a full validation gate. |
+| Retrieved documents / RAG layer | Not covered. The sample does not retrieve external context. |
+| Tool definitions exposed to the agent | Not covered. The sample assumes the agent uses its default tools. |
+| Conversation history / memory between sessions | Not covered. `STATE.yaml` is a manual position note, not session memory. |
+| Continuous specification refinement | Not covered. Specs are written once per task and not regenerated. |
+
+In CDLC terms, this sample covers the **authoring** stage (writing specs and 
+contracts that an agent reads at the start of a task) but not the **operating** 
+stage (retrieving context dynamically, maintaining state across sessions, 
+refining specs based on outcomes). The boundary is intentional: the sample is 
+designed to make the authoring stage inspectable in one sitting, and the 
+operating stage requires infrastructure (RAG, state management, refinement 
+loops) that would obscure the inspection target.
+
+Readers who want to extend toward the operating stage will find that the 
+external tools listed in chapter 7 (Spec Kit, Kiro, BMAD) address parts of 
+the operating stage that this sample omits.
 
 ---
 
